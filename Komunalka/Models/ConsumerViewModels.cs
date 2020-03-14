@@ -25,4 +25,16 @@ namespace Komunalka.Models
         [Display(Name = "Адреса")]
         public string Address { get; set; }
     }
+
+    public class ConsumerEditViewModel
+    {
+        public int Id { get; set; }
+
+        [Required]
+        [Display(Name = "Постачальник")]
+        public string Name { get; set; }
+        [Required]
+        [Display(Name = "Адреса")]
+        public string Address { get; set; }
+    }
 }
