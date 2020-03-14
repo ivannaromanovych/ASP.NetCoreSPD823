@@ -69,6 +69,31 @@ namespace Komunalka.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            ConsumerViewModel model = context.Consumers.Select(c => new ConsumerViewModel
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Address = c.Address
+
+            }).SingleOrDefault(x => x.Id == id);
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult Delete(ConsumerViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                Consumer consumer = context.Consumers.SingleOrDefault(x => x.Id == model.Id);
+                context.Consumers.Remove(consumer);
+                context.SaveChanges();
+
+            }
+            return RedirectToAction("Index");
+        }
 
     }
 }

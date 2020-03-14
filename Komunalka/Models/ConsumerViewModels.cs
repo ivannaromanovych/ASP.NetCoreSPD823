@@ -9,10 +9,10 @@ namespace Komunalka.Models
     public class ConsumerViewModel
     {
         public int Id { get; set; }
-        [Required]
+       
         [Display(Name="Постачальник")]
         public string Name { get; set; }
-        [Required]
+        
         [Display(Name="Адреса")]
         public string Address { get; set; }
     }
