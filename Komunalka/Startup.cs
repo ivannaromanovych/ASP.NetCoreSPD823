@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Komunalka.Entities;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 
 namespace Komunalka
 {
@@ -53,7 +55,13 @@ namespace Komunalka
 
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+            string serverDirectory = env.ContentRootPath;
+            serverDirectory = Path.Combine(serverDirectory, "Image");
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(serverDirectory),
+                RequestPath = new PathString("/Image")
+            });
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

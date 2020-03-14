@@ -16,5 +16,8 @@ namespace Komunalka.Entities
         public string Name { get; set; }
         [Required, StringLength(1000)]
         public string Address { get; set; }
+
+        [StringLength(1000)]
+        public string Image { get; set; }        
     }
 }
