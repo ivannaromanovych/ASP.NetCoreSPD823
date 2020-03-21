@@ -12,5 +12,7 @@ namespace Komunalka.Entities
         {
         }
         public DbSet<Consumer> Consumers { get; set; }
+        public DbSet<Resource> Resources { get; set; }
+        public DbSet<Contract> Contracts { get; set; }
     }
 }

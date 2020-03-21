@@ -68,6 +68,7 @@ namespace Komunalka
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            SeederDatabase.SeedData(app.ApplicationServices, env, Configuration);
         }
     }
 }
