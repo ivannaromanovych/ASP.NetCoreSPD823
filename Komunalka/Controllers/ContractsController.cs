@@ -31,16 +31,53 @@ namespace Komunalka.Controllers
             }).ToList();
             return View(model);
         }
-        //public IActionResult Index()
+        [HttpGet]
+        public IActionResult Create()
+        {
+            ContractCreateViewModel model = new ContractCreateViewModel();
+            model.Consumers = context.Consumers.Select(c => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
+            {
+                Value = c.Id.ToString(),
+                Text = c.Name
+            }).ToList();
+            model.Resources = context.Resources.Select(c => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
+            {
+                Value = c.Id.ToString(),
+                Text = c.Name
+            }).ToList();
+
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(ContractCreateViewModel model)
+        {
+            Contract contract = new Contract
+            {
+                DateCreate = model.DateCreate,
+                DateFinished = model.DateFinished,
+                ResourceId = model.ResourceId,
+                Price = model.Price,
+                ConsumerId = model.ConsumerId
+            };
+            context.Contracts.Add(contract);
+            context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+        //[HttpPost]
+        //public async Task<IActionResult> Create(ConsumerCreateViewModel model)
         //{
-        //    List<ConsumerViewModel> model = context.Consumers.Select(c => new ConsumerViewModel
+        //    string filename = Path.GetRandomFileName() + ".jpg";
+        //    Consumer consumer = new Consumer
         //    {
-        //        Id = c.Id,
-        //        Name = c.Name,
-        //        Address = c.Address,
-        //        Photo = "/Image/75_" + c.Image,
-        //    }).ToList();
-        //    return View(model);
+        //        Name = model.Name,
+        //        Address = model.Address,
+        //        Image = filename
+        //    };
+        //    context.Consumers.Add(consumer);
+        //    context.SaveChanges();
+        //    await AddFile(model.Image, filename);
+        //    return RedirectToAction("Index");
         //}
 
     }
