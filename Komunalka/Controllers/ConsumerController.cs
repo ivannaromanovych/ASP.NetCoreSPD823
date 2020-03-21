@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Komunalka.Entities;
+using Komunalka.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Komunalka.Entities;
-using Komunalka.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Komunalka.Controllers
 {
@@ -26,7 +26,7 @@ namespace Komunalka.Controllers
                 Id = c.Id,
                 Name = c.Name,
                 Address = c.Address,
-                Photo= "/Image/75_"+c.Image,
+                Photo = "/Image/75_" + c.Image,
             }).ToList();
             return View(model);
         }
@@ -35,7 +35,7 @@ namespace Komunalka.Controllers
         {
             return View();
         }
-       [HttpPost]
+        [HttpPost]
         public async Task<IActionResult> Create(ConsumerCreateViewModel model)
         {
             string filename = Path.GetRandomFileName() + ".jpg";
@@ -43,7 +43,7 @@ namespace Komunalka.Controllers
             {
                 Name = model.Name,
                 Address = model.Address,
-                Image=filename
+                Image = filename
             };
             context.Consumers.Add(consumer);
             context.SaveChanges();
@@ -59,18 +59,18 @@ namespace Komunalka.Controllers
                 var bitmap = GetBitmapFromFile(uploadedFile);
                 foreach (var s in fileSizes)
                 {
-                    string fileEnd = s.ToString()+ "_" + filename;
+                    string fileEnd = s.ToString() + "_" + filename;
                     string save = Path.Combine("Image", fileEnd);
                     var saveBitmap = CompressImage(bitmap, s, s);
                     saveBitmap.Save(save, ImageFormat.Jpeg);
                 }
-                
+
                 //using (FileStream fileStream = new FileStream(save, FileMode.Create))
                 //{
                 //    await uploadedFile.CopyToAsync(fileStream);
                 //}
-                
-                
+
+
 
 
             }
@@ -146,9 +146,9 @@ namespace Komunalka.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit( int id)
+        public IActionResult Edit(int id)
         {
-            ConsumerEditViewModel model= context.Consumers.Select(c => new ConsumerEditViewModel
+            ConsumerEditViewModel model = context.Consumers.Select(c => new ConsumerEditViewModel
             {
                 Id = c.Id,
                 Name = c.Name,
@@ -167,7 +167,7 @@ namespace Komunalka.Controllers
                 consumer.Address = model.Address;
                 context.SaveChanges();
 
-            }            
+            }
             return RedirectToAction("Index");
         }
 
