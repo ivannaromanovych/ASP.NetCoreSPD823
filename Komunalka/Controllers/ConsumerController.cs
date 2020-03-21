@@ -26,7 +26,7 @@ namespace Komunalka.Controllers
                 Id = c.Id,
                 Name = c.Name,
                 Address = c.Address,
-                Photo= "/Image/"+c.Image,
+                Photo= "/Image/75_"+c.Image,
             }).ToList();
             return View(model);
         }
@@ -55,14 +55,22 @@ namespace Komunalka.Controllers
         {
             if (uploadedFile != null)
             {
-                string save= Path.Combine("Image", filename);
+                int[] fileSizes = { 75, 300, 600, 1200 };
+                var bitmap = GetBitmapFromFile(uploadedFile);
+                foreach (var s in fileSizes)
+                {
+                    string fileEnd = s.ToString()+ "_" + filename;
+                    string save = Path.Combine("Image", fileEnd);
+                    var saveBitmap = CompressImage(bitmap, s, s);
+                    saveBitmap.Save(save, ImageFormat.Jpeg);
+                }
+                
                 //using (FileStream fileStream = new FileStream(save, FileMode.Create))
                 //{
                 //    await uploadedFile.CopyToAsync(fileStream);
                 //}
-                var bitmap=GetBitmapFromFile(uploadedFile);
-                var saveBitmap = CompressImage(bitmap, 75, 75);
-                saveBitmap.Save(save, ImageFormat.Jpeg);
+                
+                
 
 
             }
