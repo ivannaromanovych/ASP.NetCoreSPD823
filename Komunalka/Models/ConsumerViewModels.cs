@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -15,6 +16,10 @@ namespace Komunalka.Models
         
         [Display(Name="Адреса")]
         public string Address { get; set; }
+
+        [Display(Name = "Фото")]
+        public string Photo { get; set; }
+
     }
     public class ConsumerCreateViewModel
     {
@@ -24,8 +29,11 @@ namespace Komunalka.Models
         [Required]
         [Display(Name = "Адреса")]
         public string Address { get; set; }
-    }
 
+        [Required]
+        [Display(Name = "Фото")]
+        public IFormFile Image { get; set; }
+    }
     public class ConsumerEditViewModel
     {
         public int Id { get; set; }
