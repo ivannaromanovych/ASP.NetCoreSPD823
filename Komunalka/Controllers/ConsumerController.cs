@@ -69,10 +69,6 @@ namespace Komunalka.Controllers
                 //{
                 //    await uploadedFile.CopyToAsync(fileStream);
                 //}
-
-
-
-
             }
         }
         private Bitmap GetBitmapFromFile(IFormFile uploadedFile)

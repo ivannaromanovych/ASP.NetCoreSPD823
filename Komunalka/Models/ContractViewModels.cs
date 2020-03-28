@@ -39,7 +39,21 @@ namespace Komunalka.Models
         [Display(Name = "Послуга")]
         public int ResourceId { get; set; }
         public List<SelectListItem> Resources { get; set; }
-
-
+    }
+        public class ContractEditViewModel
+    {
+        public int Id { get; set; }
+        [Display(Name = "Дата заключення")]
+        public string DateCreate { get; set; }
+        [Display(Name = "Дата закінчення")]
+        public string DateFinished { get; set; }
+        [Display(Name = "Ціна")]
+        public decimal Price { get; set; }
+        [Display(Name = "Постачальник")]
+        public int ConsumerId { get; set; }
+        public List<SelectListItem> Consumers { get; set; }
+        [Display(Name = "Послуга")]
+        public int ResourceId { get; set; }
+        public List<SelectListItem> Resources { get; set; }
     }
 }

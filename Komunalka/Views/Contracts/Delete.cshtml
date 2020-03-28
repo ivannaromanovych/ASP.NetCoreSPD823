@@ -1,0 +1,64 @@
+﻿@model Komunalka.Models.ContractViewModel
+
+@{
+    ViewData["Title"] = "Видалення контракту";
+}
+
+<h2>Видалення контракту</h2>
+
+<h3>Ви дійсно бажаєте видалити цей контракт?</h3>
+<div>
+    <form asp-action="Delete">
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Id)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Id)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DateCreate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DateCreate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DateFinished)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DateFinished)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Consumer)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Consumer)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Resource)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Resource)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ResourceUnit)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ResourceUnit)
+            </dd>
+        </dl>
+        <input type="submit" value="Видалити" class="btn btn-danger" />
+    </form>
+</div>
+
+<div>
+    <a asp-action="Index">Повернутися</a>
+</div>
+
