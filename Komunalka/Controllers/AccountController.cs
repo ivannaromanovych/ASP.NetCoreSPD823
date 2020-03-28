@@ -26,6 +26,7 @@ namespace Komunalka.Controllers
             _roleManager = roleManager;
             _context = context;
         }
+        
         [HttpGet]
         public IActionResult Login()
         {

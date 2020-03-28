@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <Folder Include="Image\" />
+    <Folder Include="wwwroot\lib\bootstrap-datepicker\" />
   </ItemGroup>
 
 </Project>

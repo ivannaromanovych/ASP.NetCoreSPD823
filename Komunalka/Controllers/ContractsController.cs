@@ -3,6 +3,7 @@ using Komunalka.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,15 +19,19 @@ namespace Komunalka.Controllers
 
         public IActionResult Index()
         {
-            List<ContractViewModel> model = context.Contracts.Select(c => new ContractViewModel
+            CultureInfo culture = CultureInfo.CreateSpecificCulture("uk-UA");
+
+            List<ContractViewModel> model = context.Contracts
+                //.ToList()
+                .Select(c => new ContractViewModel
             {
                 Id = c.Id,
                 Consumer = c.Consumer.Name,
                 ConsumerImage = "/Image/75_" + c.Consumer.Image,
                 ResourceUnit = c.Resource.Units,
                 Price = c.Price,
-                DateCreate = c.DateCreate,
-                DateFinished = c.DateFinished,
+                DateCreate = c.DateCreate.ToString("dd.MM.yyyy", culture),
+                DateFinished = c.DateFinished.ToString("dd.MM.yyyy", culture),
                 Resource = c.Resource.Name
             }).ToList();
             return View(model);
@@ -45,16 +50,20 @@ namespace Komunalka.Controllers
                 Value = c.Id.ToString(),
                 Text = c.Name
             }).ToList();
+            CultureInfo culture = CultureInfo.CreateSpecificCulture("uk-UA");
+            model.DateCreate = DateTime.Now.ToString("dd.MM.yyyy", culture);
+            model.DateFinished = DateTime.Now.AddYears(1).ToString("dd.MM.yyyy", culture);
 
             return View(model);
         }
         [HttpPost]
         public async Task<IActionResult> Create(ContractCreateViewModel model)
         {
+            CultureInfo culture = CultureInfo.CreateSpecificCulture("uk-UA");
             Contract contract = new Contract
             {
-                DateCreate = model.DateCreate,
-                DateFinished = model.DateFinished,
+                DateCreate = DateTime.Parse(model.DateCreate, culture),
+                DateFinished = DateTime.Parse(model.DateFinished, culture),
                 ResourceId = model.ResourceId,
                 Price = model.Price,
                 ConsumerId = model.ConsumerId
