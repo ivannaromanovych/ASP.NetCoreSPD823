@@ -148,9 +148,10 @@ namespace Komunalka.Controllers
             {
                 Id = c.Id,
                 Name = c.Name,
-                Address = c.Address
-
+                Address = c.Address,
+                Photo = c.Image
             }).SingleOrDefault(x => x.Id == id);
+
             return View(model);
         }
         [HttpPost]
@@ -161,8 +162,8 @@ namespace Komunalka.Controllers
                 Consumer consumer = context.Consumers.SingleOrDefault(x => x.Id == model.Id);
                 consumer.Name = model.Name;
                 consumer.Address = model.Address;
+                consumer.Image = model.Photo;
                 context.SaveChanges();
-
             }
             return RedirectToAction("Index");
         }

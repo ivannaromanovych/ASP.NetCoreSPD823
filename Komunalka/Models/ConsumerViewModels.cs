@@ -37,12 +37,15 @@ namespace Komunalka.Models
     public class ConsumerEditViewModel
     {
         public int Id { get; set; }
-
         [Required]
         [Display(Name = "Постачальник")]
         public string Name { get; set; }
         [Required]
         [Display(Name = "Адреса")]
         public string Address { get; set; }
+        [Required]
+        [Display(Name = "Фото")]
+        public string Photo { get; set; }
+        public IFormFile Image { get; set; }
     }
 }
